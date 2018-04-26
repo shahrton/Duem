@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="GENERATOR" content="Mozilla/4.75 [en] (Win98; U) [Netscape]">
+  <meta name="Author" content="Shaheen Tonse">
+  <meta name="Description" content="duem">
+  <meta name="KeyWords" content="du emulator">
+  <meta name="Classification" content="utility script">
+  
+  <title>duem documentation</title>
+</head>
+
+<body>
+  <!---EGOF specifying style within a html file. Not using a css stylesheet file-->
+  <!---EGOF defining a tag to switch to courier font easily -->
+<style>
+  body { padding-left: 5em;
+       font-family: Georgia, "Times New Roman", Times, serif;
+       background-color: #ddddff }
+  cour {font-family: Courier;}
+</style>
+
+<h1><u>duem (du emulator)</u></h1>
+<br>
+
+<font size="-1">Last updated:
+<script lang="JavaScript">document.write(document.lastModified)</script>
+</font>
+<br><br>
+
+<p><b>duem</b>: du emulator. Emulates the Unix <b>du</b> command (<I>disk usage</I>), which is commonly used to go down directory (folder) trees and report back on disk usage below each directory.<br></p>
+  <p><font color="#3333ff">duem  (<font size=-1><I>pronounced Do 'em</I></font>), basically does something similar, but in addition:
+<ol>
+  <li>has an option, -d or --depth, to only report back for a specifed depth down the tree. Actual disk usage below a point is calculated all the way down the tree; --depth only limits what is actually displayed. Also, if depth requested was larger than the actual depth of the tree, informs that only X levels were necessary.</li>
+  <li>In addition to reporting how much disk usage in and below a directory, reports how many
+regular files are within the directory, and how much total disk space they use. (If there are no
+  other sub-directories below, then only the number of regular files is reported, not their disk usage.)</li>
+  <li>The unit for disk space reporting is chosen automatically to be human-readable, depending on the size, however command line options -b, -k, -m, -g can be used to override and report in bytes, kilobytes, etc...</li>
+</ol>
+<ul>
+  <li>Runs from command line</li>
+  <li>No additional Python Std Lib modules required, it only imports: sys, os, getopt, glob</li>
+  <li>Links are not followed, and their disk space used is ignored</li></font>
+    </ul>
+    <br>
+<font color="#ff3333">
+<h3>MS Windows Users who lack Python</h3>
+The zip file <cour>duem_1.3.5.zip</cour> contains a pre-compiled executable (<font size=-1>made with pyinstaller)</font>. Download the zip and extract the contents. A directory/folder <cour>duem</cour> will contain <cour>duem.exe</cour> and several other files <I>which are important as they contain and use a Python interpreter</I> so do not delete them. Either add this folder to your PATH environment variable, or choose a folder already in your PATH, and add a file named <cour>duem.bat</cour> which will consist of something like the following lines:
+<pre>
+  @echo off 
+  REM This is to run duem, the du emulator
+  C:\Users\YOURUSERNAME\PLACE_YOU_DOWNLOADED_TO\duem\duem.exe %*
+  REM python C:\Users\YOURUSERNAME\workspace\Du\duem.py %*
+</pre>
+Hopefully then, typing <cour>duem</cour> at a DOS prompt will work: Open a DOS window using <cour>cmd</cour>, type <cour>duem --version</cour> or <cour>duem --help</cour>.
+
+</font></p>
+<br><br>
+<hr size="3" width="75%">
+
+<h3>Example</h3>
+<b>duem</b> operating on a directory called <cour>Lookup</cour> containing:
+<pre>
+AMR/ CPP/ Cprism/ Dyssa/ Figs/ Hydrogen11/ Laminar/ Manual/ Methane22/
+Methane32/ Parallel/ Preuse/ Simsim/ Turbjet/ Zerod/
+</pre>
+will give, with<br>
+<cour>duem -d 10 Lookup</cour>:
+<pre>
+256.2M Lookup   [no regular files]
+   |->10.6M Lookup/Dyssa   [25 files: 3.6M]
+      |->7.0M Lookup/Dyssa/Figs   [85 files: 7.0M]
+         |->14.5K Lookup/Dyssa/Figs/.xvpics   [5 files]
+   |->1.2M Lookup/Hydrogen11   [4 files]
+   |->2.5M Lookup/Methane32   [32 files: 2.2M]
+      |->347.2K Lookup/Methane32/src   [42 files]
+      |->3.6K Lookup/Methane32/.xvpics   [1 files]
+   |->26.6M Lookup/Laminar   [19 files]
+   |->20.3K Lookup/Zerod   [23 files]
+   |->29.0M Lookup/Methane22   [35 files]
+   |->919.9K Lookup/Cprism   [55 files: 840.5K]
+      |->55.1K Lookup/Cprism/NGOZI   [16 files]
+      |->10.3K Lookup/Cprism/Monte   [10 files: 5.9K]
+         |->400b Lookup/Cprism/Monte/CVS   [3 files]
+      |->2.1K Lookup/Cprism/CVS   [3 files]
+   |->177.5M Lookup/AMR   [no regular files]
+      |->1.3M Lookup/AMR/FnlPrism   [61 files]
+      |->176.2M Lookup/AMR/Dimen   [115 files]
+   |->38.9K Lookup/Turbjet   [32 files]
+   |->96.2K Lookup/Manual   [8 files]
+   |->15.2K Lookup/Parallel   [2 files]
+   |->34.2K Lookup/Simsim   [23 files]
+   |->5.5M Lookup/Figs   [48 files]
+   |->348.7K Lookup/CPP   [35 files: 323.8K]
+      |->20.9K Lookup/CPP/Monte   [5 files]
+   |->1.7M Lookup/Preuse   [10 files]
+Was only necessary to go down 3 levels. --depth 10 was requested.
+</pre>
+</body>
+</html>

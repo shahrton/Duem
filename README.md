@@ -17,7 +17,7 @@ regular files are within the directory, and how much total disk space they use. 
     </ul>
     <br>
 <h3>MS Windows Users who lack Python</h3>
-The zip file 'duem_1.3.5.zip' contains a pre-compiled executable (<font size=-1>made with pyinstaller)</font>. Download the zip and extract the contents. A directory/folder <cour>duem</cour> will contain <cour>duem.exe</cour> and several other files <I>which are important as they contain and use a Python interpreter</I> so do not delete them. Either add this folder to your PATH environment variable, or choose a folder already in your PATH, and add a file named <cour>duem.bat</cour> which will consist of something like the following lines:
+The zip file `duem_1.3.5.zip` contains a pre-compiled executable (<font size=-1>made with pyinstaller)</font>. Download the zip and extract the contents. A directory/folder <cour>duem</cour> will contain <cour>duem.exe</cour> and several other files <I>which are important as they contain and use a Python interpreter</I> so do not delete them. Either add this folder to your PATH environment variable, or choose a folder already in your PATH, and add a file named <cour>duem.bat</cour> which will consist of something like the following lines:
 <pre>
   @echo off 
   REM This is to run duem, the du emulator

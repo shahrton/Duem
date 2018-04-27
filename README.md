@@ -60,4 +60,4 @@ The zip file `duem_1.4.1.zip` (or later version) contains a pre-compiled executa
   C:\Users\YOURUSERNAME\PLACE_YOU_DOWNLOADED_TO\duem\duem.exe %*
   REM python C:\Users\YOURUSERNAME\workspace\Du\duem.py %*
 ```
-Hopefully then, typing `duem` at a DOS prompt will work: Open a DOS window using `cmd`, test by typing `duem --version` or `duem --help`.
+i.e. it points to the location to which you extracted the zip file contents. Hopefully then, typing `duem` at a DOS prompt will work: Open a DOS window using `cmd`, test by typing `duem --version` or `duem --help`.

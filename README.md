@@ -16,7 +16,7 @@ regular files are within the directory, and how much total disk space they use. 
   <li>Pre-compiled executable for Windows users who don't have Python installed</li>
 </ul>
 <br>
-###MS Windows Users who lack Python
+### MS Windows Users who lack Python
 The zip file `duem_1.3.5.zip` contains a pre-compiled executable (<font size=-1>made with pyinstaller)</font>. Download the zip and extract the contents. A directory/folder <cour>duem</cour> will contain <cour>duem.exe</cour> and several other files <I>which are important as they contain and use a Python interpreter</I> so do not delete them. Either add this folder to your PATH environment variable, or choose a folder already in your PATH, and add a file named <cour>duem.bat</cour> which will consist of something like the following lines:
 <pre>
   @echo off 
@@ -26,7 +26,7 @@ The zip file `duem_1.3.5.zip` contains a pre-compiled executable (<font size=-1>
 </pre>
 Hopefully then, typing <cour>duem</cour> at a DOS prompt will work: Open a DOS window using `cmd`, type `duem --version` or `duem --help`.
 
-###Example
+### Example
 **duem** operating on a directory called <cour>Lookup</cour> containing:
 <pre>
 AMR/ CPP/ Cprism/ Dyssa/ Figs/ Hydrogen11/ Laminar/ Manual/ Methane22/

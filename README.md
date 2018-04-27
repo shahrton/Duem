@@ -1,16 +1,8 @@
 # Duem
 Python based utility to emulate the Unix du command, with several differences. Pre-compiled executable for Windows users who don't have Pyhton installed.
-See the [HTML documentation file](https://github.com/shahrton/Duem/blob/master/duem_documentation.html) for more.
-<h1><u>duem (du emulator)</u></h1>
-<br>
 
-<font size="-1">Last updated:
-<script lang="JavaScript">document.write(document.lastModified)</script>
-</font>
-<br><br>
-
-<p><b>duem</b>: du emulator. Emulates the Unix <b>du</b> command (<I>disk usage</I>), which is commonly used to go down directory (folder) trees and report back on disk usage below each directory.<br></p>
-  <p><font color="#3333ff">duem  (<font size=-1><I>pronounced Do 'em</I></font>), basically does something similar, but in addition:
+**duem**: du emulator. Emulates the Unix **du** command (*disk usage*), which is commonly used to go down directory (folder) trees and report back on disk usage below each directory.<br>
+duem (*pronounced Do 'em*), basically does something similar, but in addition:
 <ol>
   <li>has an option, -d or --depth, to only report back for a specifed depth down the tree. Actual disk usage below a point is calculated all the way down the tree; --depth only limits what is actually displayed. Also, if depth requested was larger than the actual depth of the tree, informs that only X levels were necessary.</li>
   <li>In addition to reporting how much disk usage in and below a directory, reports how many

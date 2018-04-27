@@ -1,5 +1,4 @@
-# Duem
-Python based utility to emulate the Unix du command, with several differences. Pre-compiled executable for Windows users who don't have Pyhton installed.
+qwqwqwqwqw `qwqwqwqwqwq`ghghghghghghgh
 
 **duem**: du emulator. Emulates the Unix **du** command (*disk usage*), which is commonly used to go down directory (folder) trees and report back on disk usage below each directory.<br>
 duem (*pronounced Do 'em*), basically does something similar, but in addition:
@@ -11,12 +10,13 @@ regular files are within the directory, and how much total disk space they use. 
   <li>The unit for disk space reporting is chosen automatically to be human-readable, depending on the size, however command line options -b, -k, -m, -g can be used to override and report in bytes, kilobytes, etc...</li>
 </ol>
 <ul>
-  <li>Runs from command line</li>
+  <li>Runs from command line, simple (<300 lines) Python script</li>
   <li>No additional Python Std Lib modules required, it only imports: sys, os, getopt, glob</li>
   <li>Links are not followed, and their disk space used is ignored</li>
-    </ul>
-    <br>
-<h3>MS Windows Users who lack Python</h3>
+  <li>Pre-compiled executable for Windows users who don't have Python installed</li>
+</ul>
+<br>
+###MS Windows Users who lack Python
 The zip file `duem_1.3.5.zip` contains a pre-compiled executable (<font size=-1>made with pyinstaller)</font>. Download the zip and extract the contents. A directory/folder <cour>duem</cour> will contain <cour>duem.exe</cour> and several other files <I>which are important as they contain and use a Python interpreter</I> so do not delete them. Either add this folder to your PATH environment variable, or choose a folder already in your PATH, and add a file named <cour>duem.bat</cour> which will consist of something like the following lines:
 <pre>
   @echo off 
@@ -24,20 +24,15 @@ The zip file `duem_1.3.5.zip` contains a pre-compiled executable (<font size=-1>
   C:\Users\YOURUSERNAME\PLACE_YOU_DOWNLOADED_TO\duem\duem.exe %*
   REM python C:\Users\YOURUSERNAME\workspace\Du\duem.py %*
 </pre>
-Hopefully then, typing <cour>duem</cour> at a DOS prompt will work: Open a DOS window using <cour>cmd</cour>, type <cour>duem --version</cour> or <cour>duem --help</cour>.
+Hopefully then, typing <cour>duem</cour> at a DOS prompt will work: Open a DOS window using `cmd`, type `duem --version` or `duem --help`.
 
-</font></p>
-<br><br>
-<hr size="3" width="75%">
-
-<h3>Example</h3>
-<b>duem</b> operating on a directory called <cour>Lookup</cour> containing:
+###Example
+**duem** operating on a directory called <cour>Lookup</cour> containing:
 <pre>
 AMR/ CPP/ Cprism/ Dyssa/ Figs/ Hydrogen11/ Laminar/ Manual/ Methane22/
 Methane32/ Parallel/ Preuse/ Simsim/ Turbjet/ Zerod/
 </pre>
-will give, with<br>
-<cour>duem -d 10 Lookup</cour>:
+will give, with <pre>duem -d 10 Lookup</pre>:
 <pre>
 256.2M Lookup   [no regular files]
    |->10.6M Lookup/Dyssa   [25 files: 3.6M]
@@ -68,5 +63,3 @@ will give, with<br>
    |->1.7M Lookup/Preuse   [10 files]
 Was only necessary to go down 3 levels. --depth 10 was requested.
 </pre>
-</body>
-</html>

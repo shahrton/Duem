@@ -54,7 +54,7 @@ Was only necessary to go down 3 levels. --depth 10 was requested.
 
 ### MS Windows Users who lack Python
 The file duem_1.5.2.exe is the actual duem binary (made with pyinstaller) and can be placed in any folder the user desires. It has been tested on Windows 10.
-Either add this folder to your PATH environment variable, or choose a folder already in your PATH, and add a file named `duem.bat` which will consist of something like the following lines:
+Either add this folder to your PATH environment variable, or choose a folder already in your PATH. Or you could add a file named `duem.bat` which will consist of something like the following lines:
 ```
   @echo off 
   REM This is to run duem, the du emulator

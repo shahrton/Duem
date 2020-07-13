@@ -2,7 +2,7 @@
 
 **duem**: du emulator. (*pronounced Do 'em*) Emulates the Unix **du** command (*disk usage*), which is commonly used to go down directory (folder) trees and report back on disk usage below each directory.<br>
 
-* Runs from command line, simple (<300 lines) Python 2.7 script</li>
+* Runs from command line, simple (<300 lines) Python 3.8 script</li>
 * No additional Python Std Lib modules required, it only imports: sys, os, optparse, glob</li>
 * Links are not followed, and their disk space used is ignored</li>
 * Pre-compiled executable for Windows users who don't have Python installed (see below)</li>
@@ -53,14 +53,19 @@ Was only necessary to go down 3 levels. --depth 10 was requested.
 ```
 
 ### MS Windows Users who lack Python
-The zip file `duem_1.4.1.zip` (or later version) contains a pre-compiled executable (made with pyinstaller). Download the zip and extract the contents. A directory/folder `duem` will contain `duem.exe` and several other files *which are important as they contain and use a Python interpreter so do not delete them*. Either add this folder to your PATH environment variable, or choose a folder already in your PATH, and add a file named `duem.bat` which will consist of something like the following lines:
+The file duem_1.5.2.exe is the actual duem binary (made with pyinstaller) and can be placed in any folder the user desires. It has been tested on Windows 10.
+Either add this folder to your PATH environment variable, or choose a folder already in your PATH, and add a file named `duem.bat` which will consist of something like the following lines:
 ```
   @echo off 
   REM This is to run duem, the du emulator
   C:\Users\YOURUSERNAME\PLACE_YOU_DOWNLOADED_TO\duem\duem.exe %*
   REM python C:\Users\YOURUSERNAME\workspace\Du\duem.py %*
 ```
-i.e. it points to the location to which you extracted the zip file contents. Hopefully then, typing `duem` at a DOS prompt will work: Open a DOS window using `cmd`, test by typing `duem --version` or `duem --help`.
+i.e. it points to the location to which you placed the .exe file. Hopefully then, typing `duem` at a DOS prompt will work: Open a DOS window using `cmd`, test by typing `duem --version` or `duem --help`.
+
+Old code version 1.4.1 zip file still available, is in Python 2.7. Works the same as this.
+
+Decent documentation at www.twentypede.com/leg4 and the sha256 sums are viewable there too.
 
 ### Author:
 Shaheen Tonse

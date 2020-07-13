@@ -21,11 +21,13 @@ Version_Number = ("1.3.2", "(4/9/2018)")  Refinement on writing out the disk usa
 Version_Number = ("1.3.5", "(4/25/2018)") Improvement on help. Improved handling of listing and stat errors. Use of
 DirSizeError exception discontinued. If dialled depth > required max depth, then informs so.
 Removed option to follow links, just report them optionally at end.
+Version_Number = ("1.4.1", "(4/27/2018)"): Replace getopt with optparse.
+Version_Number = ("1.5.1", "(2/14/2020)"): Converted from Py2 to Py 3 simply running 2to3.py.
 
 -----------------End of Modifications-----------------
 """
-Version_Number = ("1.4.1", "(4/27/2018)")
-"""Replace getopt with optparse.
+Version_Number = ("1.5.2", "(7/11/2020)")
+"""Updated help
 """
 
 """ToDo:
@@ -33,6 +35,7 @@ logging?
 How to handle Shortcuts?
 Threads? say 3 or 4?
 None of the above seem necessary at the present
+
 """
 import sys
 import os
@@ -71,21 +74,22 @@ class PathItem(object):
 
 
 USAGE_MESSAGE = """
-Usage:
 python duem.py [-bkmg] [-d depth] [dir1, dir2, dir3...]
-If no path specified then uses current working dir, i.e. \".\"
+Shows (in tree-like format) the disk file usage of dir1, dir2, dir3,... and
+goes down the directory (i.e. folder) tree. If no path specified then
+uses current working dir, i.e. \".\"
 """
 
 def DefineInputOptsnArgs(Version_Number_Date):
     """Define the command line options and arguments here
     """
     CLOP = optparse.OptionParser(version=Version_Number_Date,usage=USAGE_MESSAGE)     #command line options
+    CLOP.add_option("-d", "--depth", action="store", type="int", dest = "depth", default=0,
+                    help="# of directories down for print display (default=0)")
     CLOP.add_option("-b", action="store_true", default=False, help="Display in Bytes")
     CLOP.add_option("-k", action="store_true", default=False, help="Display in Kiloytes")
     CLOP.add_option("-m", action="store_true", default=False, help="Display in Megaytes")
     CLOP.add_option("-g", action="store_true", default=False, help="Display in Gigabytes")
-    CLOP.add_option("-d", "--depth", action="store", type="int", dest = "depth", default=0,
-                    help="# of directories down for print display (default=0)")
     #CLOP.add_option("--log", action="store", dest="loglevel", type="string", default="INFO",
     #                help="Specify logging verbosity level (DEBUG/ INFO(default)/ WARNING/ ERROR/ FATAL) on command line")
     return CLOP
@@ -108,7 +112,7 @@ def ProcessInputOptsnArgs(clop):
     try:
         depth = int(opts.depth)
     except:
-        print "-d arg not a valid integer: (%s)" % opts.depth
+        print("-d arg not a valid integer: (%s)" % opts.depth)
         raise
 
     return depth, units, unitname, args
@@ -132,7 +136,7 @@ def dir_size(start, start_depth=0, max_depth=0):
         else: # otherwise, just re-raise the error so that it propagates, as could be serious
             raise
 
-    total = 0L
+    total = 0
     for item in dir_list:
         # Get statistics on each item--file and subdirectory--of start
         path = join(start, item)
@@ -166,6 +170,7 @@ def dir_size(start, start_depth=0, max_depth=0):
                         PI1.L.append(PI2)
     PI1.bytes = total
     return PI1
+#-------------------------------------------------------------------------------
 
 def print_path(pathitem, indent, units):
     """Print info of the PathItem then recursively call itself for
@@ -186,7 +191,7 @@ def print_path(pathitem, indent, units):
             return "%ib" % x
         else:
             return "%ib" % x
-    #------------------------------------------------------------------
+    #--------------------------------------------------
     
     #no indentation arrow for uppermost level
     if bool(indent):
@@ -194,17 +199,17 @@ def print_path(pathitem, indent, units):
     else:
         indent_arrow = ""
     if pathitem.local_regfiles == 0:
-        print '%s%s%s %s   [no regular files]' % (indent, indent_arrow, Auto_unit(units, pathitem.bytes),
-                                        pathitem.path)
+        print('%s%s%s %s   [no regular files]' % (indent, indent_arrow, Auto_unit(units, pathitem.bytes),
+                                        pathitem.path))
     else:
         if pathitem.bytes == pathitem.local_bytes:
             #don't bother to write size a 2nd time
-            print '%s%s%s %s   [%i files]' % (indent, indent_arrow, Auto_unit(units, pathitem.bytes),
-                                              pathitem.path, pathitem.local_regfiles)
+            print('%s%s%s %s   [%i files]' % (indent, indent_arrow, Auto_unit(units, pathitem.bytes),
+                                              pathitem.path, pathitem.local_regfiles))
         else: 
-            print '%s%s%s %s   [%i files: %s]' % (indent, indent_arrow, Auto_unit(units, pathitem.bytes),
+            print('%s%s%s %s   [%i files: %s]' % (indent, indent_arrow, Auto_unit(units, pathitem.bytes),
                                                   pathitem.path, pathitem.local_regfiles,
-                                                  Auto_unit(units, pathitem.local_bytes))
+                                                  Auto_unit(units, pathitem.local_bytes)))
 
     for p in pathitem.L:          #recursive call
         print_path(p, indent+INDENT_INCREMENT, units)
@@ -232,7 +237,7 @@ if __name__=='__main__':
 
         paths = list(SoFiles)
         if not len(paths):
-            print "No recognizable paths supplied on command line: ", args
+            print("No recognizable paths supplied on command line: ", args)
             sys.exit(1)
 
     #main work done here
@@ -240,21 +245,20 @@ if __name__=='__main__':
     #EGOFGo thru all command line files/folders and recursively down their dir trees without using os.walk
     for path in paths:
         pi1 = dir_size(path, 0, depth)      #finally return a single PathItem that contains other PathItems
-        #pi1 = dir_size(path, follow_links, 0, depth)      #finally return a single PathItem that contains other PathItems
         print_path(pi1, indent, units)
 
     #Done. Some final informative messages:
-    if unitname: print unitname        #if unit of memory was explicitly requested
-    if max_depth_reached < depth: print "Was only necessary to go down %i levels. --depth %i was requested." % (max_depth_reached, depth)
+    if unitname: print(unitname)        #if unit of memory was explicitly requested
+    if max_depth_reached < depth: print("Was only necessary to go down %i levels. --depth %i was requested." % (max_depth_reached, depth))
     #If there were dirs that could not be examined, print those out here if desired
     len_errors = len(L_staterrors)+len(L_listerrors)
     if len_errors:     #EGOF handling a raw_input yesno in one line, testing for uppercase Y
-        if (raw_input("Warning: Unable to list or \"stat\" %i directories. Show?(Y/y)" % len_errors)).upper() =="Y":
+        if (input("Warning: Unable to list or \"stat\" %i directories. Show?(Y/y)" % len_errors)).upper() =="Y":
             if len(L_staterrors):
-                print "The following directories/files/links were not processed due to Stat Errors"
+                print("The following directories/files/links were not processed due to Stat Errors")
                 for d in L_staterrors:
-                    print d
+                    print(d)
             if len(L_listerrors):
-                print "The following directories were not processed due to dir listing Errors"
+                print("The following directories were not processed due to dir listing Errors")
                 for d in L_listerrors:
-                    print d
+                    print(d)
